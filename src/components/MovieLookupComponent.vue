@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    name: 'VerificationComponent',
+    name: 'MovieLookupComponent',
     data(){
         return {
             verified: false,
