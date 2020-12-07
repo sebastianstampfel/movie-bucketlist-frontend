@@ -15,6 +15,11 @@ Vue.prototype.$http = axios
 Vue.prototype.$movieListBaseUrl = process.env.VUE_APP_MOVIELIST_BACKEND_BASEURL
 
 /**
+ * Secret passphrase for admin backend
+ */
+Vue.prototype.$adminSecret = process.env.VUE_APP_MOVIELIST_ADMIN_SECRET
+
+/**
  * Sets up stuff for.
  * Make sure to provide API-Key in .env file!
  * https://developers.themoviedb.org/
@@ -36,6 +41,7 @@ axios.get( Vue.prototype.$movieApiBaseUrl + '/configuration?api_key=' + Vue.prot
   Vue.prototype.$movieApiImageBaseUrl = movieApiImageBaseUrl
 })
 
+Vue.use(require('vue-cookies'))
 Vue.use(AsyncComputed)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

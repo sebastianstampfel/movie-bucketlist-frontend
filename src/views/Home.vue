@@ -3,7 +3,7 @@
     <MovieComponent :movie=movie></MovieComponent>
     <b-row class="utils">
       <b-col xs=6>
-        <b-button style="margin-right: .4em;" v-on:click=fetch>Draw again</b-button>
+        <b-button :disabled="!redrawsPossible" style="margin-right: .4em;" v-on:click=fetch>Draw again</b-button>
       </b-col>
       <b-col xs=6>
         <b-button variant="warning" v-on:click=onClickMarkWatched>{{ markButtonText }}</b-button>
@@ -25,10 +25,22 @@ export default {
     return {
       movies: [],
       movie: {},
-      markButtonText: 'Mark as watched'
+      markButtonText: 'Mark as watched',
+      redraws: 0,
+      redrawsPossible: false
     }
   },
   created: function() {
+    if(this.$cookies.isKey("MOVIELIST_redraws")){
+      this.redraws = this.$cookies.get("MOVIELIST_redraws")
+      if(this.redraws > 0){
+        this.redrawsPossible = true
+      }
+    } else {
+      this.$cookies.set("MOVIELIST_redraws", 2)
+      this.redrawsPossible = true
+    }
+
     const base = this.$movieListBaseUrl
     this.$http.get(base + "/random-movie")
     .then((result) => {
@@ -50,6 +62,12 @@ export default {
       .then((result) => {
         this.movie = result.data
       })
+
+      this.redraws--;
+      if(this.redraws == 0){
+        this.redrawsPossible = false;
+      }
+      this.$cookies.set("MOVIELIST_redraws", this.redraws);
     },
     onClickMarkWatched: function() {
       const base = this.$movieListBaseUrl
