@@ -10,6 +10,7 @@ node_modules
 .env.local
 .env.*.local
 .env
+cypress.env.json
 
 # Log files
 npm-debug.log*
