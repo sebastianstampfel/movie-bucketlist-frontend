@@ -38,7 +38,12 @@ axios.get( Vue.prototype.$movieApiBaseUrl + '/configuration?api_key=' + Vue.prot
   const movieApiImageBaseUrl = result.data.images.base_url 
         + result.data.images.poster_sizes[totalPosterSizes-1]
 
-  Vue.prototype.$movieApiImageBaseUrl = movieApiImageBaseUrl
+
+  /**
+   * TMDB API provides http as image baselink.
+   * To prevent "mixed content", replace http with https
+   */
+  Vue.prototype.$movieApiImageBaseUrl = movieApiImageBaseUrl.replace("http", "https")
 })
 
 Vue.use(require('vue-cookies'))
