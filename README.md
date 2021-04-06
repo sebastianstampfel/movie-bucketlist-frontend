@@ -1,4 +1,6 @@
-# jake-movie-bucketlist
+# Movie bucketlist frontend
+
+A frontend based on Vue.js for use with [Movie bucketlist backend](https://github.com/sebastianstampfel/movie-bucketlist-backend). Draws a random (unwatched) movies from the moviepool, displays it and allows for marking the movie as a watched one (you know how a bucketlist works...).
 
 ## Project setup
 ```
@@ -14,16 +16,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
